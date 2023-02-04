@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class GridManagerScript : MonoBehaviour
@@ -67,6 +68,8 @@ public class GridManagerScript : MonoBehaviour
     public int waterEnergy = 100;
 
     public bool isPaused = false;
+    public Text waterEnergyText;
+    public Text missStreakText;
 
     void Start()
     {
@@ -194,7 +197,7 @@ public class GridManagerScript : MonoBehaviour
                 waterEnergy += 36;
             }
 
-            missStreak = 0;
+            missStreak = 1;
             return true;
         }
 
@@ -237,7 +240,7 @@ public class GridManagerScript : MonoBehaviour
                 waterEnergy += 36;
             }
 
-            missStreak = 0;
+            missStreak = 1;
             return true;
         }
 
@@ -275,7 +278,7 @@ public class GridManagerScript : MonoBehaviour
                 waterEnergy += 36;
             }
 
-            missStreak = 0;
+            missStreak = 1;
             return true;
         }
         if (Input.GetKeyDown(KeyCode.D) && currentPos.x < width - 1)
@@ -313,7 +316,7 @@ public class GridManagerScript : MonoBehaviour
                 waterEnergy += 36;
             }
 
-            missStreak = 0;
+            missStreak = 1;
             return true;
         }
 
@@ -337,7 +340,8 @@ public class GridManagerScript : MonoBehaviour
             PauseGame();
         }
 
-        Debug.Log($"{waterEnergy}");
+        waterEnergyText.text = $"{waterEnergy}";
+        missStreakText.text = $"{missStreak}";
         // win condition
         if (timeElapsed >= 90)
         {
