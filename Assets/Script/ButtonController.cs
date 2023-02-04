@@ -76,6 +76,8 @@ public class ButtonController : MonoBehaviour
         {
             var gms = transform.root.GetComponent<GridManagerScript>();
             gms.allowedToMove = true;
+            gms.waterEnergy -= 6;
+            if (gms.waterEnergy < 0) gms.waterEnergy = 0;
         }
     }
 
@@ -88,11 +90,14 @@ public class ButtonController : MonoBehaviour
             {
                 gms.allowedToMove = false;
                 gms.missStreak += 1;
-                gms.waterEnergy -= 6;
-                if (gms.waterEnergy < 0) gms.waterEnergy = 0;
             }
 
             Destroy(other.gameObject);
+        }
+        else if (other.tag == "BeatLeft")
+        {
+            Destroy(other.gameObject);
+
         }
     }
 }

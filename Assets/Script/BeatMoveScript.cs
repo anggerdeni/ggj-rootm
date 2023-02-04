@@ -8,10 +8,12 @@ public class BeatMoveScript : MonoBehaviour
     public float beatTempo;
 
     public bool canBePressed = false;
+    private float prevX;
     // Start is called before the first frame update
     void Start()
     {
         beatTempo = beatTempo / 60f;
+        prevX = transform.position.x;
     }
 
     // Update is called once per frame
