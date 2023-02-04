@@ -61,7 +61,6 @@ public class GridManagerScript : MonoBehaviour
         FromLeft,
     }
     private Origin origin = Origin.FromUp;
-    private bool gameStart = true;
 
     public int missStreak = 0;
     private float timeElapsed;
@@ -359,6 +358,12 @@ public class GridManagerScript : MonoBehaviour
         timeElapsed += Time.deltaTime;
 
         attemptToMove();
+    }
+
+    void StartGame()
+    {
+        Time.timeScale = 1;
+        isPaused = false;
     }
 
     void PauseGame()
