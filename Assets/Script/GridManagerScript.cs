@@ -129,7 +129,7 @@ public class GridManagerScript : MonoBehaviour
             }
         }
 
-        cam.transform.position = new Vector3((float)width / 2, (float)height, -10);
+        cam.transform.position = new Vector3((float)width / 2, (float)maxMovableHeight, -10);
         rootTip = Instantiate(rootTipSprite, new Vector3(rootTipPos[0], rootTipPos[1], -1), Quaternion.identity);
         rootTip.sprite = tipDown.sprite;
 
