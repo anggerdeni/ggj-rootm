@@ -6,13 +6,21 @@ public class ButtonController : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     private Sprite defaultSprite;
-    public Sprite pressedSprite;
+    public Sprite successSprite;
+    public Sprite missedSprite;
+
+    private bool isDefaultSprite;
+    private float timer;
+
+
+    private bool missed = true;
 
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>(); 
         defaultSprite = spriteRenderer.sprite;
+        isDefaultSprite = true;
     }
 
     // Update is called once per frame
@@ -38,35 +46,33 @@ public class ButtonController : MonoBehaviour
             buttonPressed();
         }
 
-        if (Input.GetKeyUp(KeyCode.W))
+
+        if (!isDefaultSprite)
         {
-            buttonReleased();
+            if (timer < 0.3) {
+                timer += Time.deltaTime;
+            } else {
+                timer = 0;
+                isDefaultSprite = true;
+                spriteRenderer.sprite = defaultSprite;
+            }
         }
 
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            buttonReleased();
-        }
+    }
 
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            buttonReleased();
-        }
-
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            buttonReleased();
-        }
+    public void SetMissed()
+    {
+        missed = true;
+        isDefaultSprite = false;
+        spriteRenderer.sprite = missedSprite;
     }
 
     void buttonPressed()
     {
-        spriteRenderer.sprite = pressedSprite;
-    }
+        if (missed) spriteRenderer.sprite = missedSprite;
+        else spriteRenderer.sprite = successSprite;
 
-    void buttonReleased()
-    {
-        spriteRenderer.sprite = defaultSprite;
+        isDefaultSprite = false;
     }
 
 
@@ -79,6 +85,7 @@ public class ButtonController : MonoBehaviour
             gms.waterEnergy -= 6;
             if (gms.waterEnergy < 0) gms.waterEnergy = 0;
             gms.UpdateWaterText();
+            missed = false;
         }
     }
 
@@ -94,6 +101,7 @@ public class ButtonController : MonoBehaviour
             }
 
             Destroy(other.gameObject);
+            missed = true;
         }
         else if (other.tag == "BeatLeft")
         {
