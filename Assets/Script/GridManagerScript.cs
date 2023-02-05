@@ -92,6 +92,8 @@ public class GridManagerScript : MonoBehaviour
     public Transform waterEnergyUI;
 
     public AudioSource music;
+    public AudioSource winSound;
+    public AudioSource loseSound;
 
     void Start()
     {
@@ -330,6 +332,8 @@ public class GridManagerScript : MonoBehaviour
         {
             if (!allowedToMove)
             {
+                waterEnergy -= 6;
+                UpdateWaterText();
                 return false;
             }
             var newPost = rootTip.transform.position + Vector3.down;
@@ -378,6 +382,8 @@ public class GridManagerScript : MonoBehaviour
         {
             if (!allowedToMove)
             {
+                waterEnergy -= 6;
+                UpdateWaterText();
                 return false;
             }
             var newPost = rootTip.transform.position + Vector3.up;
@@ -426,6 +432,8 @@ public class GridManagerScript : MonoBehaviour
         {
             if (!allowedToMove)
             {
+                waterEnergy -= 6;
+                UpdateWaterText();
                 return false;
             }
             var newPost = rootTip.transform.position + Vector3.left;
@@ -468,6 +476,8 @@ public class GridManagerScript : MonoBehaviour
         {
             if (!allowedToMove)
             {
+                waterEnergy -= 6;
+                UpdateWaterText();
                 return false;
             }
             var newPost = rootTip.transform.position + Vector3.right;
@@ -535,9 +545,11 @@ public class GridManagerScript : MonoBehaviour
         }
 
         // win condition
-        if (timeElapsed >= 110)
+        if (!music.isPlaying)
         {
             Win();
+            music.Stop();
+            winSound.Play();
             gameFinished = true;
         }
 
@@ -545,6 +557,8 @@ public class GridManagerScript : MonoBehaviour
         if (waterEnergy <= 0)
         {
             Lose();
+            music.Stop();
+            loseSound.Play();
             gameFinished = true;
         }
 
