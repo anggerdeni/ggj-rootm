@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beat: {fileID: 1556654661057588578, guid: 1deb6d7963ac152c584d9c3a4f7f40f8, type: 3}
   cam: {fileID: 0}
-  beatTempo: 0
+  beatTempo: 180
 --- !u!1 &6597102960891540721
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,4 +287,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beat: {fileID: 1556654661057588578, guid: 5cbffd01d942b4bcd9c5a75c25a0dae2, type: 3}
   cam: {fileID: 0}
-  beatTempo: 0
+  beatTempo: 180

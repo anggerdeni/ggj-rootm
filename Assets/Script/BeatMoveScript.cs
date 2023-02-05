@@ -5,14 +5,14 @@ using UnityEngine;
 public class BeatMoveScript : MonoBehaviour
 {
     public string direction = "left";
-    public float beatTempo;
+    public float speed;
 
     public bool canBePressed = false;
     private float prevX;
     // Start is called before the first frame update
     void Start()
     {
-        beatTempo = beatTempo / 35f;
+        speed = 1.5f;
         prevX = transform.position.x;
     }
 
@@ -25,9 +25,9 @@ public class BeatMoveScript : MonoBehaviour
         }
 
         if (direction == "left")
-            transform.position += Vector3.left * beatTempo * Time.deltaTime;
+            transform.position += Vector3.left * speed * Time.deltaTime;
         else 
-            transform.position += Vector3.right * beatTempo * Time.deltaTime;
+            transform.position += Vector3.right * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
