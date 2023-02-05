@@ -78,6 +78,7 @@ public class ButtonController : MonoBehaviour
             gms.allowedToMove = true;
             gms.waterEnergy -= 6;
             if (gms.waterEnergy < 0) gms.waterEnergy = 0;
+            gms.UpdateWaterText();
         }
     }
 

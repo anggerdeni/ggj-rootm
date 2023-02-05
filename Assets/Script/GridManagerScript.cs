@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine;
+using TMPro;
 
 public class GridManagerScript : MonoBehaviour
 {
@@ -9,6 +11,12 @@ public class GridManagerScript : MonoBehaviour
     public SpriteRenderer soilTileSprite;
     public SpriteRenderer stoneTileSprite;
     public SpriteRenderer waterTileSprite;
+    public SpriteRenderer soilTileSprite2;
+    public SpriteRenderer stoneTileSprite2;
+    public SpriteRenderer waterTileSprite2;
+    public SpriteRenderer soilTileSprite3;
+    public SpriteRenderer stoneTileSprite3;
+    public SpriteRenderer waterTileSprite3;
     public SpriteRenderer rootTipSprite;
     public SpriteRenderer tipUp;
     public SpriteRenderer tipUpUp;
@@ -67,6 +75,8 @@ public class GridManagerScript : MonoBehaviour
     public int waterEnergy = 100;
 
     public bool isPaused = false;
+    public TMP_Text waterEnergyText;
+    public TMP_Text scoreText;
 
     public GameObject pauseScreen;
     public GameObject winScreen;
@@ -74,6 +84,8 @@ public class GridManagerScript : MonoBehaviour
 
     private GameObject pauseGameObject;
     private GameObject finishGameObject;
+    
+    private bool gameFinished;
 
     void Start()
     {
@@ -110,23 +122,29 @@ public class GridManagerScript : MonoBehaviour
                 GridState st = list[index];
                 gridState[i, j] = st;
 
+                int spriteidx = random.Next(3);
+
+                SpriteRenderer[] soils = {soilTileSprite, soilTileSprite2, soilTileSprite3};
+                SpriteRenderer[] waters = {waterTileSprite, waterTileSprite2, waterTileSprite3};
+                SpriteRenderer[] stones = {stoneTileSprite, stoneTileSprite2, stoneTileSprite3};
+
                 switch (st)
                 {
                     case GridState.Empty:
-                        var spawnedTile = Instantiate(soilTileSprite, new Vector3(i, j, 0), Quaternion.identity);
+                        var spawnedTile = Instantiate(soils[spriteidx], new Vector3(i, j, 0), Quaternion.identity);
                         gridTiles[i, j] = spawnedTile;
                         spawnedTile.name = $"Tile {i} {j}";
                         spawnedTile.transform.SetParent(tiles);
                         gridTiles[i, j] = spawnedTile;
                         break;
                     case GridState.Water:
-                        var spawnedTile2 = Instantiate(waterTileSprite, new Vector3(i, j, 0), Quaternion.identity);
+                        var spawnedTile2 = Instantiate(waters[spriteidx], new Vector3(i, j, 0), Quaternion.identity);
                         gridTiles[i, j] = spawnedTile2;
                         spawnedTile2.name = $"Tile {i} {j}";
                         spawnedTile2.transform.SetParent(tiles);
                         break;
                     case GridState.Stone:
-                        var spawnedTile3 = Instantiate(stoneTileSprite, new Vector3(i, j, 0), Quaternion.identity);
+                        var spawnedTile3 = Instantiate(soils[spriteidx], new Vector3(i, j, 0), Quaternion.identity);
                         gridTiles[i, j] = spawnedTile3;
                         spawnedTile3.name = $"Tile {i} {j}";
                         spawnedTile3.transform.SetParent(tiles);
@@ -197,8 +215,14 @@ public class GridManagerScript : MonoBehaviour
 
             if (gridState[(int)newPost.x, (int)newPost.y] == GridState.Water)
             {
-                gridTiles[(int)newPost.x, (int)newPost.y].sprite = soilTileSprite.sprite;
+                SpriteRenderer[] srs = gridTiles[(int)newPost.x, (int)newPost.y].GetComponentsInChildren<SpriteRenderer>();
+                foreach(SpriteRenderer sr in srs)
+                {
+                    if(sr.name == "Water" || sr.name == "Square")
+                        sr.sprite = null;
+                }
                 waterEnergy += 36;
+                UpdateWaterText();
             }
 
             missStreak = 1;
@@ -240,8 +264,14 @@ public class GridManagerScript : MonoBehaviour
 
             if (gridState[(int)newPost.x, (int)newPost.y] == GridState.Water)
             {
-                gridTiles[(int)newPost.x, (int)newPost.y].sprite = soilTileSprite.sprite;
+                SpriteRenderer[] srs = gridTiles[(int)newPost.x, (int)newPost.y].GetComponentsInChildren<SpriteRenderer>();
+                foreach(SpriteRenderer sr in srs)
+                {
+                    if(sr.name == "Water" || sr.name == "Square")
+                        sr.sprite = null;
+                }
                 waterEnergy += 36;
+                UpdateWaterText();
             }
 
             missStreak = 1;
@@ -278,8 +308,14 @@ public class GridManagerScript : MonoBehaviour
             gridState[(int)currentPos.x, (int)currentPos.y] = GridState.Root;
             if (gridState[(int)newPost.x, (int)newPost.y] == GridState.Water)
             {
-                gridTiles[(int)newPost.x, (int)newPost.y].sprite = soilTileSprite.sprite;
+                SpriteRenderer[] srs = gridTiles[(int)newPost.x, (int)newPost.y].GetComponentsInChildren<SpriteRenderer>();
+                foreach(SpriteRenderer sr in srs)
+                {
+                    if(sr.name == "Water" || sr.name == "Square")
+                        sr.sprite = null;
+                }
                 waterEnergy += 36;
+                UpdateWaterText();
             }
 
             missStreak = 1;
@@ -316,8 +352,15 @@ public class GridManagerScript : MonoBehaviour
 
             if (gridState[(int)newPost.x, (int)newPost.y] == GridState.Water)
             {
-                gridTiles[(int)newPost.x, (int)newPost.y].sprite = soilTileSprite.sprite;
+                SpriteRenderer[] srs = gridTiles[(int)newPost.x, (int)newPost.y].GetComponentsInChildren<SpriteRenderer>();
+                foreach(SpriteRenderer sr in srs)
+                {
+                    if(sr.name == "Water" || sr.name == "Square")
+                        sr.sprite = null;
+                }
+                
                 waterEnergy += 36;
+                UpdateWaterText();
             }
 
             missStreak = 1;
@@ -329,6 +372,11 @@ public class GridManagerScript : MonoBehaviour
 
     void Update()
     {
+        if (gameFinished)
+        {
+            return;
+        }
+        
         if (isPaused)
         {
             if (Input.GetKeyDown(KeyCode.Escape) || pauseGameObject == null)
@@ -345,17 +393,17 @@ public class GridManagerScript : MonoBehaviour
         }
 
         // win condition
-        if (timeElapsed >= 90)
+        if (timeElapsed >= 30)
         {
-            Debug.Log("you win, time elapsed");
-            PauseGame();
+            Win();
+            gameFinished = true;
         }
 
         // lose condition
         if (missStreak >= 5 || waterEnergy <= 0)
         {
-            Debug.Log($"you lose, {waterEnergy} {missStreak}");
-            PauseGame();
+            Lose();
+            gameFinished = true;
         }
 
         timeElapsed += Time.deltaTime;
@@ -385,6 +433,24 @@ public class GridManagerScript : MonoBehaviour
         isPaused = false;
 
         if (pauseGameObject != null) Destroy(pauseGameObject);
+    }
+
+
+    public void UpdateWaterText()
+    {
+        waterEnergyText.text = $"{waterEnergy}";
+    }
+
+    public void Lose()
+    {
+        var loseGameObject = Instantiate(loseScreen, new Vector3(0, 0, 0), Quaternion.identity);
+        loseGameObject.transform.SetParent(transform.parent);
+    }
+
+    public void Win()
+    {
+        var winGameObject = Instantiate(winScreen, new Vector3(0, 0, 0), Quaternion.identity);
+        winGameObject.transform.SetParent(transform.parent);
     }
 }
 
