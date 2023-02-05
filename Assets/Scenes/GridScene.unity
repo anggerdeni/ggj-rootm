@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelLoader
       objectReference: {fileID: 0}
+    - target: {fileID: 6191521783966523585, guid: 4da17cc1f33251530be370bd5033e727, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6191521783966523598, guid: 4da17cc1f33251530be370bd5033e727, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1349,4 +1353,3 @@ MonoBehaviour:
   pauseScreen: {fileID: 7646929896647449962, guid: 5d47c38c1cf74704982cf51fea71e124, type: 3}
   winScreen: {fileID: 7405473092267559874, guid: 31b54f4ae263c941cab77875b6fb8684, type: 3}
   loseScreen: {fileID: 4202853372545341305, guid: 2fc73e683b5abcce7859db842eaf8d21, type: 3}
-  transition: {fileID: 0}
