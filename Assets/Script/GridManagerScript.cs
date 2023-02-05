@@ -67,8 +67,13 @@ public class GridManagerScript : MonoBehaviour
     public int waterEnergy = 100;
 
     public bool isPaused = false;
-    public Text waterEnergyText;
-    public Text missStreakText;
+
+    public GameObject pauseScreen;
+    public GameObject winScreen;
+    public GameObject loseScreen;
+
+    private GameObject pauseGameObject;
+    private GameObject finishGameObject;
 
     void Start()
     {
@@ -326,7 +331,7 @@ public class GridManagerScript : MonoBehaviour
     {
         if (isPaused)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) || pauseGameObject == null)
             {
                 ResumeGame();
             }
@@ -339,8 +344,6 @@ public class GridManagerScript : MonoBehaviour
             PauseGame();
         }
 
-        waterEnergyText.text = $"{waterEnergy}";
-        missStreakText.text = $"{missStreak}";
         // win condition
         if (timeElapsed >= 90)
         {
@@ -370,12 +373,18 @@ public class GridManagerScript : MonoBehaviour
     {
         Time.timeScale = 0;
         isPaused = true;
+
+        pauseGameObject = Instantiate(pauseScreen, new Vector3(0, 0, 0), Quaternion.identity);
+        pauseGameObject.transform.SetParent(transform.parent);
+
     }
 
     void ResumeGame()
     {
         Time.timeScale = 1;
         isPaused = false;
+
+        if (pauseGameObject != null) Destroy(pauseGameObject);
     }
 }
 
