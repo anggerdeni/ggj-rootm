@@ -1315,6 +1315,12 @@ MonoBehaviour:
   soilTileSprite: {fileID: 2360707821575278255, guid: febf92eb4b0f1b554972354d5fc80a3a, type: 3}
   stoneTileSprite: {fileID: 4692927491763554483, guid: cefaba4edceee7cccbde63190cb093c7, type: 3}
   waterTileSprite: {fileID: 367549212940892543, guid: 1901123958101535482999c4175a241b, type: 3}
+  soilTileSprite2: {fileID: 2360707821575278255, guid: b701dcb32ff2914afab7dc6c6150d522, type: 3}
+  stoneTileSprite2: {fileID: 4692927491763554483, guid: fd6b7af58be13489eb7dc68a7ebcfd99, type: 3}
+  waterTileSprite2: {fileID: 367549212940892543, guid: 70a5d491c3e611e349e39c7bcb22c89c, type: 3}
+  soilTileSprite3: {fileID: 2360707821575278255, guid: 87fc1489d3331b0bdad4948430813800, type: 3}
+  stoneTileSprite3: {fileID: 4692927491763554483, guid: f140c6d631c4cf6dd86d06b1f7082f52, type: 3}
+  waterTileSprite3: {fileID: 367549212940892543, guid: 22891801ea9a6cc8bba0a184476d7c46, type: 3}
   rootTipSprite: {fileID: 5078943378758330430, guid: 737b8245574f45a988694ab1507f8abc, type: 3}
   tipUp: {fileID: 4659041135346574777, guid: 191a633787a00ca51910bac6796d8b29, type: 3}
   tipUpUp: {fileID: 3554898779904200416, guid: dc1ddf9387acab4afbe6b2df82c9d097, type: 3}

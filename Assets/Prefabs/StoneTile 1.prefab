@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 4692927491763554483}
   - component: {fileID: 8565678767135081595}
   m_Layer: 0
-  m_Name: StoneTile
+  m_Name: StoneTile 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,7 +159,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -873939844, guid: c990ffd2941622cff8f3da677dcd9bf1, type: 3}
+  m_Sprite: {fileID: -235532084, guid: c990ffd2941622cff8f3da677dcd9bf1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
