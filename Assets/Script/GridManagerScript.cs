@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine;
+using TMPro;
 
 public class GridManagerScript : MonoBehaviour
 {
@@ -67,6 +69,8 @@ public class GridManagerScript : MonoBehaviour
     public int waterEnergy = 100;
 
     public bool isPaused = false;
+    public TMP_Text waterEnergyText;
+    public TMP_Text scoreText;
 
     public GameObject pauseScreen;
     public GameObject winScreen;
@@ -74,6 +78,14 @@ public class GridManagerScript : MonoBehaviour
 
     private GameObject pauseGameObject;
     private GameObject finishGameObject;
+    
+    private bool gameFinished;
+
+    public Animator transition;
+    public void LoadMainMenu()
+    {
+        // TODO;
+    }
 
     void Start()
     {
@@ -199,6 +211,7 @@ public class GridManagerScript : MonoBehaviour
             {
                 gridTiles[(int)newPost.x, (int)newPost.y].sprite = soilTileSprite.sprite;
                 waterEnergy += 36;
+                UpdateWaterText();
             }
 
             missStreak = 1;
@@ -242,6 +255,7 @@ public class GridManagerScript : MonoBehaviour
             {
                 gridTiles[(int)newPost.x, (int)newPost.y].sprite = soilTileSprite.sprite;
                 waterEnergy += 36;
+                UpdateWaterText();
             }
 
             missStreak = 1;
@@ -280,6 +294,7 @@ public class GridManagerScript : MonoBehaviour
             {
                 gridTiles[(int)newPost.x, (int)newPost.y].sprite = soilTileSprite.sprite;
                 waterEnergy += 36;
+                UpdateWaterText();
             }
 
             missStreak = 1;
@@ -318,6 +333,7 @@ public class GridManagerScript : MonoBehaviour
             {
                 gridTiles[(int)newPost.x, (int)newPost.y].sprite = soilTileSprite.sprite;
                 waterEnergy += 36;
+                UpdateWaterText();
             }
 
             missStreak = 1;
@@ -329,6 +345,11 @@ public class GridManagerScript : MonoBehaviour
 
     void Update()
     {
+        if (gameFinished)
+        {
+            return;
+        }
+        
         if (isPaused)
         {
             if (Input.GetKeyDown(KeyCode.Escape) || pauseGameObject == null)
@@ -345,17 +366,17 @@ public class GridManagerScript : MonoBehaviour
         }
 
         // win condition
-        if (timeElapsed >= 90)
+        if (timeElapsed >= 10)
         {
-            Debug.Log("you win, time elapsed");
-            PauseGame();
+            Win();
+            gameFinished = true;
         }
 
         // lose condition
         if (missStreak >= 5 || waterEnergy <= 0)
         {
-            Debug.Log($"you lose, {waterEnergy} {missStreak}");
-            PauseGame();
+            Lose();
+            gameFinished = true;
         }
 
         timeElapsed += Time.deltaTime;
@@ -385,6 +406,24 @@ public class GridManagerScript : MonoBehaviour
         isPaused = false;
 
         if (pauseGameObject != null) Destroy(pauseGameObject);
+    }
+
+
+    public void UpdateWaterText()
+    {
+        waterEnergyText.text = $"{waterEnergy}";
+    }
+
+    public void Lose()
+    {
+        var loseGameObject = Instantiate(loseScreen, new Vector3(0, 0, 0), Quaternion.identity);
+        loseGameObject.transform.SetParent(transform.parent);
+    }
+
+    public void Win()
+    {
+        var winGameObject = Instantiate(winScreen, new Vector3(0, 0, 0), Quaternion.identity);
+        winGameObject.transform.SetParent(transform.parent);
     }
 }
 
