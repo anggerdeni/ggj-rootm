@@ -60,13 +60,6 @@ public class ButtonController : MonoBehaviour
 
     }
 
-    public void SetMissed()
-    {
-        missed = true;
-        isDefaultSprite = false;
-        spriteRenderer.sprite = missedSprite;
-    }
-
     void buttonPressed()
     {
         if (missed) spriteRenderer.sprite = missedSprite;
@@ -94,11 +87,7 @@ public class ButtonController : MonoBehaviour
         if (other.tag == "Beat")
         {
             var gms = transform.root.GetComponent<GridManagerScript>();
-            if (gms.allowedToMove && !gms.isPaused)
-            {
-                gms.allowedToMove = false;
-                gms.missStreak += 1;
-            }
+            gms.allowedToMove = false;
 
             Destroy(other.gameObject);
             missed = true;

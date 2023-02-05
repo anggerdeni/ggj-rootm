@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TitleScript : MonoBehaviour
+public class TutorialScript : MonoBehaviour
 {
     public Animator transition;
 
@@ -24,7 +24,7 @@ public class TitleScript : MonoBehaviour
 
     public void LoadGameGrid()
     {
-        StartCoroutine(LoadLevel(2));
+        StartCoroutine(LoadLevel(1));
     }
 
     IEnumerator LoadLevel(int levelIndex)
