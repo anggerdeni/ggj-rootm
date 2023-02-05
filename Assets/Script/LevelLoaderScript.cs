@@ -7,7 +7,7 @@ public class LevelLoaderScript : MonoBehaviour
 {
     public Animator transition;
 
-    void Start() {}
+    void Start() { }
 
     // Update is called once per frame
     void Update()

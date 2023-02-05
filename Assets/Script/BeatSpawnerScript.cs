@@ -14,7 +14,7 @@ public class BeatSpawnerScript : MonoBehaviour
     void Start()
     {
         spawnBeat();
-        waitTime = 60f/beatTempo;
+        waitTime = 74f/beatTempo;
     }
 
     // Update is called once per frame
