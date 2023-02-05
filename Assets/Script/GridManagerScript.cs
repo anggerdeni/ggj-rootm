@@ -49,7 +49,6 @@ public class GridManagerScript : MonoBehaviour
     public Transform tiles;
 
 
-    private float timer = 0;
     private int[] rootTipPos = { 0, 0 };
 
     private int maxMovableHeight;
@@ -74,7 +73,6 @@ public class GridManagerScript : MonoBehaviour
     }
     private Origin origin = Origin.FromUp;
 
-    public int missStreak = 0;
     private float timeElapsed;
     public int waterEnergy = 100;
 
@@ -90,6 +88,10 @@ public class GridManagerScript : MonoBehaviour
     private GameObject finishGameObject;
     
     public bool gameFinished;
+
+    public Transform waterEnergyUI;
+
+    public AudioSource music;
 
     void Start()
     {
@@ -183,6 +185,8 @@ public class GridManagerScript : MonoBehaviour
             GridState.Empty,
             GridState.Empty,
             GridState.Empty,
+            GridState.Empty,
+            GridState.Empty,
             GridState.Stone,
             GridState.Stone,
             GridState.Stone,
@@ -198,13 +202,8 @@ public class GridManagerScript : MonoBehaviour
             GridState.Stone,
             GridState.Stone,
             GridState.Stone,
-            GridState.Stone,
-            GridState.Stone,
-            GridState.Stone,
-            GridState.Stone,
-            GridState.Stone,
-            GridState.Stone,
-            GridState.Stone,
+            GridState.Water,
+            GridState.Water,
             GridState.Water,
             GridState.Water,
         };
@@ -256,14 +255,14 @@ public class GridManagerScript : MonoBehaviour
             }
         }
         for (int j = 0; j < maxMovableHeight; j++) {
-            Instantiate(sidestone[2+random.Next(2)], new Vector3(-1, j, 0), Quaternion.identity);
-            Instantiate(stone[random.Next(3)], new Vector3(-2, j, 0), Quaternion.identity);
-            Instantiate(stone[random.Next(3)], new Vector3(-3, j, 0), Quaternion.identity);
+            Instantiate(sidestone[2+random.Next(2)], new Vector3(-1, j, 0), Quaternion.identity).transform.SetParent(tiles);
+            Instantiate(stone[random.Next(3)], new Vector3(-2, j, 0), Quaternion.identity).transform.SetParent(tiles);
+            Instantiate(stone[random.Next(3)], new Vector3(-3, j, 0), Quaternion.identity).transform.SetParent(tiles);
 
-            Instantiate(sidestone[random.Next(2)], new Vector3(width, j, 0), Quaternion.identity);
-            Instantiate(stone[random.Next(3)], new Vector3(width+1, j, 0), Quaternion.identity);
-            Instantiate(stone[random.Next(3)], new Vector3(width+2, j, 0), Quaternion.identity);
-            Instantiate(stone[random.Next(3)], new Vector3(width+3, j, 0), Quaternion.identity);
+            Instantiate(sidestone[random.Next(2)], new Vector3(width, j, 0), Quaternion.identity).transform.SetParent(tiles);
+            Instantiate(stone[random.Next(3)], new Vector3(width+1, j, 0), Quaternion.identity).transform.SetParent(tiles);
+            Instantiate(stone[random.Next(3)], new Vector3(width+2, j, 0), Quaternion.identity).transform.SetParent(tiles);
+            Instantiate(stone[random.Next(3)], new Vector3(width+3, j, 0), Quaternion.identity).transform.SetParent(tiles);
         }
 
 
@@ -271,43 +270,43 @@ public class GridManagerScript : MonoBehaviour
         rootTip = Instantiate(rootTipSprite, new Vector3(rootTipPos[0], rootTipPos[1], -1), Quaternion.identity);
         rootTip.sprite = tipDown.sprite;
 
-        Instantiate(stone[random.Next(3)], new Vector3(rootTipPos[0]-8, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[random.Next(3)], new Vector3(rootTipPos[0]-7, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[random.Next(3)], new Vector3(rootTipPos[0]-6, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]-5, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]-4, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]-3, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]-2, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]-1, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(grass[3], new Vector3(rootTipPos[0], rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]+1, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]+2, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]+3, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]+4, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]+5, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[random.Next(3)], new Vector3(rootTipPos[0]+6, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[random.Next(3)], new Vector3(rootTipPos[0]+7, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[random.Next(3)], new Vector3(rootTipPos[0]+8, rootTipPos[1]+1, -1), Quaternion.identity);
-        Instantiate(stone[random.Next(3)], new Vector3(rootTipPos[0]+9, rootTipPos[1]+1, -1), Quaternion.identity);
+        Instantiate(stone[random.Next(3)], new Vector3(rootTipPos[0]-8, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[random.Next(3)], new Vector3(rootTipPos[0]-7, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[random.Next(3)], new Vector3(rootTipPos[0]-6, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]-5, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]-4, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]-3, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]-2, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]-1, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[3], new Vector3(rootTipPos[0], rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]+1, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]+2, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]+3, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]+4, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[3+random.Next(3)], new Vector3(rootTipPos[0]+5, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[random.Next(3)], new Vector3(rootTipPos[0]+6, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[random.Next(3)], new Vector3(rootTipPos[0]+7, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[random.Next(3)], new Vector3(rootTipPos[0]+8, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(stone[random.Next(3)], new Vector3(rootTipPos[0]+9, rootTipPos[1]+1, -1), Quaternion.identity).transform.SetParent(tiles);
 
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-8, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-7, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-6, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-5, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-4, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-3, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-2, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-1, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[3], new Vector3(rootTipPos[0], rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+1, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+2, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+3, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+4, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+5, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+6, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+7, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+8, rootTipPos[1]+2, -1), Quaternion.identity);
-        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+9, rootTipPos[1]+2, -1), Quaternion.identity);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-8, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-7, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-6, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-5, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-4, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-3, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-2, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]-1, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[3], new Vector3(rootTipPos[0], rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+1, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+2, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+3, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+4, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+5, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+6, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+7, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+8, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
+        Instantiate(grass[random.Next(3)], new Vector3(rootTipPos[0]+9, rootTipPos[1]+2, -1), Quaternion.identity).transform.SetParent(tiles);
 
     }
 
@@ -331,7 +330,6 @@ public class GridManagerScript : MonoBehaviour
         {
             if (!allowedToMove)
             {
-                missStreak += 1;
                 return false;
             }
             var newPost = rootTip.transform.position + Vector3.down;
@@ -373,7 +371,6 @@ public class GridManagerScript : MonoBehaviour
                 UpdateWaterText();
             }
 
-            missStreak = 0;
             return true;
         }
 
@@ -381,7 +378,6 @@ public class GridManagerScript : MonoBehaviour
         {
             if (!allowedToMove)
             {
-                missStreak += 1;
                 return false;
             }
             var newPost = rootTip.transform.position + Vector3.up;
@@ -423,7 +419,6 @@ public class GridManagerScript : MonoBehaviour
                 UpdateWaterText();
             }
 
-            missStreak = 0;
             return true;
         }
 
@@ -431,7 +426,6 @@ public class GridManagerScript : MonoBehaviour
         {
             if (!allowedToMove)
             {
-                missStreak += 1;
                 return false;
             }
             var newPost = rootTip.transform.position + Vector3.left;
@@ -468,14 +462,12 @@ public class GridManagerScript : MonoBehaviour
                 UpdateWaterText();
             }
 
-            missStreak = 0;
             return true;
         }
         if (Input.GetKeyDown(KeyCode.D) && currentPos.x < width - 1)
         {
             if (!allowedToMove)
             {
-                missStreak += 1;
                 return false;
             }
             var newPost = rootTip.transform.position + Vector3.right;
@@ -514,7 +506,6 @@ public class GridManagerScript : MonoBehaviour
                 UpdateWaterText();
             }
 
-            missStreak = 0;
             return true;
         }
 
@@ -544,14 +535,14 @@ public class GridManagerScript : MonoBehaviour
         }
 
         // win condition
-        if (timeElapsed >= 30)
+        if (timeElapsed >= 110)
         {
             Win();
             gameFinished = true;
         }
 
         // lose condition
-        if (missStreak >= 8 || waterEnergy <= 0)
+        if (waterEnergy <= 0)
         {
             Lose();
             gameFinished = true;
@@ -562,16 +553,11 @@ public class GridManagerScript : MonoBehaviour
         attemptToMove();
     }
 
-    void StartGame()
-    {
-        Time.timeScale = 1;
-        isPaused = false;
-    }
-
     void PauseGame()
     {
         Time.timeScale = 0;
         isPaused = true;
+        music.Pause();
 
         pauseGameObject = Instantiate(pauseScreen, new Vector3(0, 0, 0), Quaternion.identity);
         pauseGameObject.transform.SetParent(transform.parent);
@@ -582,6 +568,7 @@ public class GridManagerScript : MonoBehaviour
     {
         Time.timeScale = 1;
         isPaused = false;
+        music.Play();
 
         if (pauseGameObject != null) Destroy(pauseGameObject);
     }
@@ -589,7 +576,11 @@ public class GridManagerScript : MonoBehaviour
 
     public void UpdateWaterText()
     {
-        waterEnergyText.text = $"{waterEnergy}";
+        // TODO
+        var percentage = waterEnergy / 100f;
+
+        var currentScaling = waterEnergyUI.transform.localScale;
+        waterEnergyUI.transform.localScale = new Vector3(currentScaling.x, percentage * 5, currentScaling.z);
     }
 
     public void Lose()
