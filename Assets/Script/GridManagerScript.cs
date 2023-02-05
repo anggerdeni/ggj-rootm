@@ -222,6 +222,7 @@ public class GridManagerScript : MonoBehaviour
                         sr.sprite = null;
                 }
                 waterEnergy += 36;
+                if (waterEnergy > 100) waterEnergy = 100;
                 UpdateWaterText();
             }
 
@@ -271,6 +272,7 @@ public class GridManagerScript : MonoBehaviour
                         sr.sprite = null;
                 }
                 waterEnergy += 36;
+                if (waterEnergy > 100) waterEnergy = 100;
                 UpdateWaterText();
             }
 
@@ -315,6 +317,7 @@ public class GridManagerScript : MonoBehaviour
                         sr.sprite = null;
                 }
                 waterEnergy += 36;
+                if (waterEnergy > 100) waterEnergy = 100;
                 UpdateWaterText();
             }
 
@@ -360,6 +363,7 @@ public class GridManagerScript : MonoBehaviour
                 }
                 
                 waterEnergy += 36;
+                if (waterEnergy > 100) waterEnergy = 100;
                 UpdateWaterText();
             }
 

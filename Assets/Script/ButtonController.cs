@@ -6,7 +6,11 @@ public class ButtonController : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     private Sprite defaultSprite;
-    public Sprite pressedSprite;
+    public Sprite successSprite;
+    public Sprite missedSprite;
+
+
+    private bool missed = true;
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +65,8 @@ public class ButtonController : MonoBehaviour
 
     void buttonPressed()
     {
-        spriteRenderer.sprite = pressedSprite;
+        if (missed) spriteRenderer.sprite = missedSprite;
+        else spriteRenderer.sprite = successSprite;
     }
 
     void buttonReleased()
@@ -79,6 +84,7 @@ public class ButtonController : MonoBehaviour
             gms.waterEnergy -= 6;
             if (gms.waterEnergy < 0) gms.waterEnergy = 0;
             gms.UpdateWaterText();
+            missed = false;
         }
     }
 
@@ -94,6 +100,7 @@ public class ButtonController : MonoBehaviour
             }
 
             Destroy(other.gameObject);
+            missed = true;
         }
         else if (other.tag == "BeatLeft")
         {
