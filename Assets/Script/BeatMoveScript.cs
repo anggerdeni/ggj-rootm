@@ -19,6 +19,11 @@ public class BeatMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var gms = transform.root.GetComponent<GridManagerScript>();
+        if (gms.gameFinished) {
+            return;
+        }
+
         if (direction == "left")
             transform.position += Vector3.left * beatTempo * Time.deltaTime;
         else 

@@ -20,6 +20,11 @@ public class BeatSpawnerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var gms = transform.root.GetComponent<GridManagerScript>();
+        if (gms.gameFinished) {
+            return;
+        }
+
         if (timer < waitTime)
         {
             timer += Time.deltaTime;

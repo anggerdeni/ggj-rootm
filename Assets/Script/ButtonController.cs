@@ -9,6 +9,9 @@ public class ButtonController : MonoBehaviour
     public Sprite successSprite;
     public Sprite missedSprite;
 
+    private bool isDefaultSprite;
+    private float timer;
+
 
     private bool missed = true;
 
@@ -17,6 +20,7 @@ public class ButtonController : MonoBehaviour
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>(); 
         defaultSprite = spriteRenderer.sprite;
+        isDefaultSprite = true;
     }
 
     // Update is called once per frame
@@ -42,36 +46,33 @@ public class ButtonController : MonoBehaviour
             buttonPressed();
         }
 
-        if (Input.GetKeyUp(KeyCode.W))
+
+        if (!isDefaultSprite)
         {
-            buttonReleased();
+            if (timer < 0.3) {
+                timer += Time.deltaTime;
+            } else {
+                timer = 0;
+                isDefaultSprite = true;
+                spriteRenderer.sprite = defaultSprite;
+            }
         }
 
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            buttonReleased();
-        }
+    }
 
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            buttonReleased();
-        }
-
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            buttonReleased();
-        }
+    public void SetMissed()
+    {
+        missed = true;
+        isDefaultSprite = false;
+        spriteRenderer.sprite = missedSprite;
     }
 
     void buttonPressed()
     {
         if (missed) spriteRenderer.sprite = missedSprite;
         else spriteRenderer.sprite = successSprite;
-    }
 
-    void buttonReleased()
-    {
-        spriteRenderer.sprite = defaultSprite;
+        isDefaultSprite = false;
     }
 
 

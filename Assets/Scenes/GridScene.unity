@@ -1314,7 +1314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 410df29d9cd8821f58758ee9ad054553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 11
+  width: 10
   height: 100
   soilTileSprite: {fileID: 2360707821575278255, guid: febf92eb4b0f1b554972354d5fc80a3a, type: 3}
   stoneTileSprite: {fileID: 4692927491763554483, guid: cefaba4edceee7cccbde63190cb093c7, type: 3}
@@ -1343,6 +1343,27 @@ MonoBehaviour:
   tipLeftUp: {fileID: 2181444957940111285, guid: b50f10afe4f5d9e7caa8806c086eee7f, type: 3}
   tipLeftDown: {fileID: 385042525031893786, guid: bb17ab2ddd4a87bf285b03f6d12793d7, type: 3}
   allowedToMove: 0
+  grass:
+  - {fileID: 3001280286445797749, guid: 008b369af2fa0d55fb09384b38b1b7e0, type: 3}
+  - {fileID: 175297236448982355, guid: 678eb9277cfb1659682c842e43f6a797, type: 3}
+  - {fileID: 7724343865024346253, guid: c2ee464adff6d8deeb91ceb24e3c740d, type: 3}
+  - {fileID: 6236908308710718817, guid: 02b8571b8e9ed4437a558146fba93b03, type: 3}
+  - {fileID: 2964457238220538125, guid: ac564b9448d1dff4e8f52470b9585430, type: 3}
+  - {fileID: 664872310753520210, guid: 666b18ac0215c1b10a04ceaacb081c7d, type: 3}
+  - {fileID: 1412996012344862713, guid: dcaa09b4c1dc0a56aa2f2deb9b6fe934, type: 3}
+  - {fileID: 5068567352498691254, guid: fc7737ec02955ef03a61a151ca9c9245, type: 3}
+  stone:
+  - {fileID: 3557933171842068741, guid: 334b33b50e8a5c14ebafacf57a3eb930, type: 3}
+  - {fileID: 5978592910618583751, guid: 35b04f2c884fe006a9ab7524009701e6, type: 3}
+  - {fileID: 6930802857710398201, guid: 7c874ae6383a0c4d1bc4c132457c4923, type: 3}
+  - {fileID: 1667248663560318515, guid: 6dc7e546caad12c0a82ac4795142e83c, type: 3}
+  - {fileID: 4713845582937318386, guid: 4c22c16602ed8ad3bb562488c7e0f327, type: 3}
+  - {fileID: 8816444425952043960, guid: 2d6c95849c31786af80615fc3f4b875f, type: 3}
+  sidestone:
+  - {fileID: 7199160061340705695, guid: e5128c5a07d9fa79cae84340f0dcd3b3, type: 3}
+  - {fileID: 1951528893986729505, guid: 1fff2004b4b4df0d1b9500df6bd2e320, type: 3}
+  - {fileID: 8258096189054671610, guid: 997c96e1dfbacebd7a95dfb0ceca4f6b, type: 3}
+  - {fileID: 881676733725174510, guid: 9e93633c767941b70ad8a589b6b25ca6, type: 3}
   cam: {fileID: 189301595}
   tiles: {fileID: 1877895680}
   missStreak: 0
@@ -1353,3 +1374,4 @@ MonoBehaviour:
   pauseScreen: {fileID: 7646929896647449962, guid: 5d47c38c1cf74704982cf51fea71e124, type: 3}
   winScreen: {fileID: 7405473092267559874, guid: 31b54f4ae263c941cab77875b6fb8684, type: 3}
   loseScreen: {fileID: 4202853372545341305, guid: 2fc73e683b5abcce7859db842eaf8d21, type: 3}
+  gameFinished: 0
