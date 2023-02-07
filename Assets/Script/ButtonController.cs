@@ -9,6 +9,9 @@ public class ButtonController : MonoBehaviour
     public Sprite successSprite;
     public Sprite missedSprite;
 
+    public AudioSource okSound;
+    public AudioSource missSound;
+
     private bool isDefaultSprite;
     private float timer;
 
@@ -62,8 +65,14 @@ public class ButtonController : MonoBehaviour
 
     void buttonPressed()
     {
-        if (missed) spriteRenderer.sprite = missedSprite;
-        else spriteRenderer.sprite = successSprite;
+        if (missed) {
+            spriteRenderer.sprite = missedSprite;
+            missSound.Play();
+        }
+        else {
+            spriteRenderer.sprite = successSprite;
+            okSound.Play();
+        }
 
         isDefaultSprite = false;
     }

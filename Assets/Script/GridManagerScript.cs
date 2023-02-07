@@ -94,6 +94,7 @@ public class GridManagerScript : MonoBehaviour
     public AudioSource music;
     public AudioSource winSound;
     public AudioSource loseSound;
+    public AudioSource missSound;
 
     void Start()
     {
@@ -201,9 +202,9 @@ public class GridManagerScript : MonoBehaviour
             GridState.Stone,
             GridState.Stone,
             GridState.Stone,
-            GridState.Stone,
-            GridState.Stone,
-            GridState.Stone,
+            GridState.Water,
+            GridState.Water,
+            GridState.Water,
             GridState.Water,
             GridState.Water,
             GridState.Water,
@@ -334,6 +335,7 @@ public class GridManagerScript : MonoBehaviour
             {
                 waterEnergy -= 6;
                 UpdateWaterText();
+                missSound.Play();
                 return false;
             }
             var newPost = rootTip.transform.position + Vector3.down;
@@ -384,6 +386,7 @@ public class GridManagerScript : MonoBehaviour
             {
                 waterEnergy -= 6;
                 UpdateWaterText();
+                missSound.Play();
                 return false;
             }
             var newPost = rootTip.transform.position + Vector3.up;
@@ -434,6 +437,7 @@ public class GridManagerScript : MonoBehaviour
             {
                 waterEnergy -= 6;
                 UpdateWaterText();
+                missSound.Play();
                 return false;
             }
             var newPost = rootTip.transform.position + Vector3.left;
@@ -478,6 +482,7 @@ public class GridManagerScript : MonoBehaviour
             {
                 waterEnergy -= 6;
                 UpdateWaterText();
+                missSound.Play();
                 return false;
             }
             var newPost = rootTip.transform.position + Vector3.right;
