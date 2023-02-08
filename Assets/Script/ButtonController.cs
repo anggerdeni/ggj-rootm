@@ -68,6 +68,10 @@ public class ButtonController : MonoBehaviour
         if (missed) {
             spriteRenderer.sprite = missedSprite;
             missSound.Play();
+            var gms = transform.root.GetComponent<GridManagerScript>();
+            gms.waterEnergy -= 2;
+            if (gms.waterEnergy < 0) gms.waterEnergy = 0;
+            gms.UpdateWaterText();
         }
         else {
             spriteRenderer.sprite = successSprite;
