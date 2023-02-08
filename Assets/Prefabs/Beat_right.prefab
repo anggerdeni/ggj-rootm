@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: left
-  speed: 1024
+  beat: 51
+  distanceFromCenter: 3
   canBePressed: 0
 --- !u!58 &7892293094752769570
 CircleCollider2D:

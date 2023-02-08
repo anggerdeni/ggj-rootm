@@ -96,6 +96,11 @@ public class GridManagerScript : MonoBehaviour
     public AudioSource loseSound;
     public AudioSource missSound;
 
+    public float beatTempo;
+    public int numOfBeatTillStartMusic;
+    private bool isMusicStarted;
+    private float timeElapsedBeforeStartingMusic = 0;
+
     void Start()
     {
         Time.timeScale = 1;
@@ -107,6 +112,7 @@ public class GridManagerScript : MonoBehaviour
         rootTipPos[0] = (int)width / 2;
         rootTipPos[1] = maxMovableHeight - 1;
         GenerateGrid();
+        isMusicStarted = false;
     }
 
     void GenerateGrid()
@@ -550,7 +556,7 @@ public class GridManagerScript : MonoBehaviour
         }
 
         // win condition
-        if (!music.isPlaying)
+        if (isMusicStarted && !music.isPlaying)
         {
             Win();
             music.Stop();
@@ -570,6 +576,15 @@ public class GridManagerScript : MonoBehaviour
         timeElapsed += Time.deltaTime;
 
         attemptToMove();
+
+        if (!isMusicStarted) {
+            timeElapsedBeforeStartingMusic += Time.deltaTime;
+            if (timeElapsedBeforeStartingMusic >= numOfBeatTillStartMusic * (60f/beatTempo)) {
+                music.Play();
+                isMusicStarted = true;
+            }
+            
+        }
     }
 
     void PauseGame()
