@@ -199,9 +199,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144404495}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.000015258789, z: -9.999999}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -572,7 +572,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 70}
   m_SizeDelta: {x: 640, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1412905170
@@ -595,7 +595,28 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: INI CREDIT
+  m_text: '-Game Designer-
+
+    Indra Bayu P @inddrrr
+
+
+    -Game Programmer-
+
+    Novian
+    Deny CA @novian.deny
+
+
+    -Game Artist-
+
+    Irvan Tri P @irvan.tepe
+
+    Ilham
+    Abdulah @ilhamabdulah_art
+
+
+    -Game Composer-
+
+    Hari Septiyan @day2rise'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 48b2cfd7c28a942c3a0b1893666d85a5, type: 2}
   m_sharedMaterial: {fileID: 5457996687375713705, guid: 48b2cfd7c28a942c3a0b1893666d85a5, type: 2}
@@ -622,8 +643,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
-  m_fontSizeBase: 48
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
