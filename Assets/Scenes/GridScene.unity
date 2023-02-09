@@ -557,7 +557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6191521783966523585, guid: 4da17cc1f33251530be370bd5033e727, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6191521783966523598, guid: 4da17cc1f33251530be370bd5033e727, type: 3}
       propertyPath: m_RootOrder
@@ -1592,7 +1592,7 @@ PrefabInstance:
       objectReference: {fileID: 189301595}
     - target: {fileID: 6597102961872828642, guid: 981835e41f73e7b76b8410ecb2e67f4a, type: 3}
       propertyPath: beatTempo
-      value: 50.3
+      value: 50.8
       objectReference: {fileID: 0}
     - target: {fileID: 6597102961872828669, guid: 981835e41f73e7b76b8410ecb2e67f4a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1608,7 +1608,7 @@ PrefabInstance:
       objectReference: {fileID: 189301595}
     - target: {fileID: 8071808365815690536, guid: 981835e41f73e7b76b8410ecb2e67f4a, type: 3}
       propertyPath: beatTempo
-      value: 50.3
+      value: 50.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 981835e41f73e7b76b8410ecb2e67f4a, type: 3}
@@ -1889,5 +1889,5 @@ MonoBehaviour:
   winSound: {fileID: 1959093337}
   loseSound: {fileID: 101269631}
   missSound: {fileID: 37555193}
-  beatTempo: 51
+  beatTempo: 50.8
   numOfBeatTillStartMusic: 3
