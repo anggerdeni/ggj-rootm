@@ -196,6 +196,8 @@ public class GridManagerScript : MonoBehaviour
             GridState.Empty,
             GridState.Empty,
             GridState.Empty,
+            GridState.Empty,
+            GridState.Empty,
             GridState.Stone,
             GridState.Stone,
             GridState.Stone,
@@ -208,8 +210,6 @@ public class GridManagerScript : MonoBehaviour
             GridState.Stone,
             GridState.Stone,
             GridState.Stone,
-            GridState.Water,
-            GridState.Water,
             GridState.Water,
             GridState.Water,
             GridState.Water,
@@ -556,7 +556,7 @@ public class GridManagerScript : MonoBehaviour
         }
 
         // win condition
-        if (isMusicStarted && !music.isPlaying)
+        if (isMusicStarted && !music.isPlaying && !isPaused)
         {
             Win();
             music.Stop();
@@ -602,7 +602,7 @@ public class GridManagerScript : MonoBehaviour
     {
         Time.timeScale = 1;
         isPaused = false;
-        music.Play();
+        if (isMusicStarted) music.Play();
 
         if (pauseGameObject != null) Destroy(pauseGameObject);
     }
